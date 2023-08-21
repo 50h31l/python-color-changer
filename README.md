@@ -6,8 +6,9 @@ with this package you can easily change your code color.
 Example:
 
 """
-    from color_changer.color import Color
 
+    from color_changer.color import Color
+    
     txt = 'this text want to change color.'
     Color(text= txt, color='red', bold=True, underline=False)
 
