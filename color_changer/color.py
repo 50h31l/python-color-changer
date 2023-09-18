@@ -1,45 +1,65 @@
 class Color:
-    def __init__(self, text, color=None, bold=None, underline=None):
-        self.color = color
+    def __init__(self, text, color=None, bold=None, underline=None, border=None, background=None):
+        self.color = color.lower()
         self.bold = bold
         self.und = underline
         self.txt = text
-        lib = []
+        self.border = border
+        self.back = background
+
+    def __str__(self):
+        lib = ''
 
         # Color
         if self.color == 'purple':
-            lib.append('\033[95m')
+            lib += '\033[95m'
+        elif self.color == 'grey':
+            lib += '\033[90m'
         elif self.color == 'cyan':
-            lib.append('\033[96m')
+            lib += '\033[96m'
         elif self.color == 'darkcyan':
-            lib.append('\033[36m')
+            lib += '\033[36m'
         elif self.color == 'blue':
-            lib.append('\033[94m')
+            lib += '\033[94m'
         elif self.color == 'green':
-            lib.append('\033[92m')
+            lib += '\033[92m'
         elif self.color == 'yellow':
-            lib.append('\033[93m')
+            lib += '\033[93m'
         elif self.color == 'red':
-            lib.append('\033[91m')
+            lib += '\033[91m'
         elif self.color != 'purple' or 'cyan' or 'darkcyan' or 'blue' or 'green' or 'yellow' or 'red':
             raise Exception('Color not found'.upper())
 
+        if self.back == 'purple':
+            lib += '\033[45m'
+        elif self.back == 'grey':
+            lib += '\033[47m'
+        elif self.back == 'cyan':
+            lib += '\033[46m'
+        elif self.back == 'black':
+            lib += '\033[40m'
+        elif self.back == 'blue':
+            lib += '\033[44m'
+        elif self.back == 'green':
+            lib += '\033[42m'
+        elif self.back == 'yellow':
+            lib += '\033[43m'
+        elif self.back == 'red' or self.back == 'pink':
+            lib += '\033[41m'
+        elif self.back != 'purple' or 'cyan' or 'black' or 'pink' or 'blue' or 'green' or 'yellow' or 'red':
+            raise Exception('background color not found'.upper())
+
+        if self.border:
+            lib += '\033[51m'
+
         # Bold
         if self.bold:
-            lib.append('\033[1m')
+            lib += '\033[1m'
 
         # Underline
         if self.und:
-            lib.append('\033[4m')
+            lib += '\033[4m'
 
-        lib.append(self.txt)
-
-        txt_len = len(lib) - 1  # 3
-        if txt_len == 0:
-            print(self.txt)
-        elif txt_len == 1:
-            print(lib[0] + lib[1])
-        elif txt_len == 2:
-            print(lib[0] + lib[1] + lib[2])
-        elif txt_len == 3:
-            print(lib[0] + lib[1] + lib[2] + lib[3])
+        lib += self.txt
+        lib += '\033[0m'
+        return lib
