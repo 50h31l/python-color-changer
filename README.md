@@ -6,16 +6,20 @@ with this package you can easily change your code color.
 Example:
 
 """
-
-    from color_changer.color import Color
     
+    from color_changer.color import Color
+
     txt = 'this text want to change color.'
-    Color(text= txt, color='red', bold=True, underline=False)
+    
+    print(Color(text=txt,
+            color='blue',
+            background='black',
+            bold=True,
+            underline=False,
+            border=True))
 
 """
 
-
-[*] - This package don't need to write print before the "Color".
 
 Accepted color:
     1-purple
@@ -25,3 +29,12 @@ Accepted color:
     5-green
     6-yellow
     7-red
+    
+Accepted background color:
+    1-purple
+    2-grey
+    3-cyan
+    4-black
+    5-green
+    6-yellow
+    7-red or pink
